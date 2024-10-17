@@ -95,9 +95,6 @@ def get_data_block_memory(address , line_number = 1) :
           if ( address >= len( data_block_memory) ) :
                print( line_number)
 
-            #    if  (f'{t}_{len(runtime_stack)}'  in temp_id_stacks and temp_id_stacks[f'{t}_{len(runtime_stack)}'] !=None ) :
-            #      return temp_id_stacks[f'{t}_{len(runtime_stack)}'].type
-            #    else :
                return "temp_int"
           
           if ( address < 0) :
@@ -114,9 +111,7 @@ def get_data_block_memory(address , line_number = 1) :
           address =  ( int(address)  - data_block_base) // 4 
 
           if ( address >= len( data_block_memory) ) :
-            #    if  (f'{t}_{len(runtime_stack)}'  in temp_id_stacks  and temp_id_stacks[f'{t}_{len(runtime_stack)}'] !=None ) :
-            #      return temp_id_stacks[f'{t}_{len(runtime_stack)}'].type
-            #    else :
+
                     return "temp_int"
           
           if ( address <  0 ) :
@@ -424,11 +419,6 @@ def  PID(token, line_number):
                     help_stack.append(token)
                     temp_id_stacks[f'@{address}_{len(runtime_stack)}'] = data
 
-
-                    
-                
-                # print("nastaran ", token, ss  )
-                # print([ (d.memory_address , d.type , d.lexeme) for d in symbol_table[current_scope()]])
             else : 
                     ss.append(-1)
         
@@ -496,8 +486,6 @@ def DEC_ARRAY(line_number) :
     size = ss.pop()
     array_name = ss.pop()
     data_memory_index = get_data_memory_current_index() 
-    # data = Data(lexeme=array_name , type='arr', memory_address=data_memory_index , array_size=size)
-    # data_block_memory.append(data)
     if not error_handle('DEC_ARR' ,[array_name, type] , line_number) :
          return
          
@@ -519,21 +507,12 @@ def DEC_ARRAY(line_number) :
     # for i in range(len(data_block_memory)) :
     #      print("kill me ", data_block_memory[i].lexeme , data_block_memory[i].memory_address , data_block_memory[i].type )
 
-
-
-  
-
 def DEC_FUNCTION(line_number) :
 
     func_name = ss.pop()
     return_type = ss.pop()
     scope_stack.append(func_name)
     if (func_name == 'main') :
-        # Program_block[0](('ASSIGN', '#10000', str(data_block_base - 4) , None))
-        # Program_block[1](('ASSIGN', '#10000', str(STACK_PLACE - 4) , None))
-        # Program_block[2](('ASSIGN', f'#{STACK_PLACE}' ,fsp ,  None))
-        # Program_block[3](('ASSIGN',  f'#{top_sp + 4}' , top_sp ,   None))
-
 
         current_pb_index = len(Program_block)
         Program_block[4]  =  ('JP' , str(current_pb_index) ,None , None ) 
@@ -549,14 +528,7 @@ def DEC_FUNCTION(line_number) :
         symbol_table[func_name].append(data)
         ss.append(func_name)
 
-
-
-
-
-
-
 def SAVE_ARGS(line_number) :
-    # print( "khaste shodam ", ss)
     func_name = ss.pop()
     # print()
     if ( current_scope()!= func_name ) :
@@ -569,11 +541,7 @@ def SAVE_ARGS(line_number) :
 
 def END_FUNCTION(line_number):
         scope_stack.pop()
-        # self.current_symbol_table = self.global_symbol_table
         RETURN_VOID(line_number)
-
-
-
 
 def DEC_ARRAY_POINTER( line_number) :
     array_name = ss.pop()
@@ -590,9 +558,6 @@ def DEC_ARRAY_POINTER( line_number) :
         symbol_table[current_scope()].append(data)
 
     
-
-
-
 def BREAK(line_number) :
     # check = error_handle('BREAK', is_while)
     # if check :
@@ -697,9 +662,6 @@ def WHILE(line_number) :
               Program_block[break_index] = ( ('JP', to_jump_when_break , None , None))
               
 
-
-
-
 def RETURN_VALUE(line_number):
         # print("len :", len(Program_block))
         # print("GA ", ss)
@@ -750,8 +712,6 @@ def att_array(b ,size):
     ss.append(f'@{t1}')
     temp_id_stacks[f'@{t1}_{len(runtime_stack)}'] = Data(lexeme='?', type='int' , memory_address='1000')
 
-    
-
 
 def const_array(b ,size):
     t1 = get_temp_index()
@@ -764,10 +724,6 @@ def cal_array_size(ofs):
     temp_size  = get_temp_index()
     Program_block.append(('MULT', '#4', ofs, temp_size))
     return temp_size
-
-
-
-
 
 
 def ARR_ADDR(line_number) :
@@ -826,8 +782,6 @@ def MULT (line_number ) :
 
 
 
-
-
 def SAVE_RELOP_RESULT(line_number):
         # print("ss :", ss)
         a = ss.pop()
@@ -839,8 +793,6 @@ def SAVE_RELOP_RESULT(line_number):
             Program_block.append( (compare , b , a , t ))
         ss.append(t)
         temp_id_stacks[f'{t}_{len(runtime_stack)}'] = Data(lexeme='?', type='int' , memory_address='1000')
-
-
 
 
 
