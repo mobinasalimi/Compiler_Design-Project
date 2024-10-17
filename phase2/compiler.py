@@ -3,15 +3,6 @@ from anytree import Node, RenderTree
 from first_follow import data
 
 
-# class ParseTreeNode:
-#     def __init__(self, symbol):
-#         self.symbol = symbol
-#         self.children = []
-
-#     def add_child(self, child_node):
-#         self.children.append(child_node)
-
-
 white_space = [' ' , '  ','\r','\n','\t','\f','\v']
 keyword  = ['if', 'else', 'void', 'int', 'break', 'while', 'return']
 see = ["(",")","{","}","[","]","+","-",",",":",";","<"]
