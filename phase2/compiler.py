@@ -660,12 +660,6 @@ for line_number in sorted(tokens_table):
 
 token_lists[last_number].append(('$','$'))
 
-# print(token_lists)
-
-
-# print("SimpleExpressionPrime" , parsing_table['SimpleExpressionPrime'])
-
-
 
 from anytree import Node, RenderTree
 def parse(token_lists, parsing_table, first_sets, follow_sets):
